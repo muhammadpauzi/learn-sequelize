@@ -1,0 +1,24 @@
+@url = http://localhost:5000/api/users
+@random = {{$randomInt 1 100}}
+###
+GET {{url}}
+###
+POST {{url}}
+Content-Type: application/json
+
+{
+    "name": "User {{random}}",
+    "username": "user_{{random}}",
+    "address": "address_{{random}}",
+    "phone": "+{{$randomInt 1 100}} {{$randomInt 1 10000}} {{$randomInt 1 10000}}"
+}
+###
+DELETE {{url}}/3
+###
+PATCH {{url}}/4
+Content-Type: application/json
+
+{
+    "name": "User {{random}}",
+    "username": "user_{{random}}_updated"
+}
