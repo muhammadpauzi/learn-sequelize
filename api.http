@@ -1,9 +1,10 @@
-@url = http://localhost:5000/api/users
+@url_users = http://localhost:5000/api/users
+@url_posts = http://localhost:5000/api/posts
 @random = {{$randomInt 1 100}}
 ###
-GET {{url}}
+GET {{url_users}}
 ###
-POST {{url}}
+POST {{url_users}}
 Content-Type: application/json
 
 {
@@ -13,12 +14,31 @@ Content-Type: application/json
     "phone": "+{{$randomInt 1 100}} {{$randomInt 1 10000}} {{$randomInt 1 10000}}"
 }
 ###
-DELETE {{url}}/3
+DELETE {{url_users}}/3
 ###
-PATCH {{url}}/4
+PATCH {{url_users}}/4
 Content-Type: application/json
 
 {
     "name": "User {{random}}",
     "username": "user_{{random}}_updated"
+}
+###
+GET {{url_posts}}
+###
+POST {{url_posts}}
+Content-Type: application/json
+
+{
+    "user_id": 2,
+    "content": "content..."
+}
+###
+GET {{url_posts}}/1
+###
+PATCH {{url_posts}}/1
+Content-Type: application/json
+
+{
+    "content": "content... (updated)"
 }

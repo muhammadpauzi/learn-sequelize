@@ -1,4 +1,4 @@
-const { DataTypes, Model } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = require('../database');
 
 const User = sequelize.define('User', {
@@ -19,5 +19,12 @@ const User = sequelize.define('User', {
         type: DataTypes.STRING(128),
     }
 }, { timestamps: true });
+
+User.sync().then(() => {
+    console.log("User table created!");
+})
+// User.sync({ force: true }).then(() => {
+//     console.log("User table created!");
+// })
 
 module.exports = User;
