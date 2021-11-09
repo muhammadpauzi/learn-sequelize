@@ -1,6 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database');
 const User = require('./User');
+const Like = require('./Like');
 
 const Post = sequelize.define('Post', {
     content: {
@@ -12,14 +13,5 @@ const Post = sequelize.define('Post', {
         defaultValue: 0
     }
 }, { timestamps: true });
-
-Post.belongsTo(User);
-
-Post.sync().then(() => {
-    console.log("Post table created!");
-})
-// Post.sync({ force: true }).then(() => {
-//     console.log("Post table created!");
-// })
 
 module.exports = Post;

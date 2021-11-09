@@ -1,5 +1,6 @@
 @url_users = http://localhost:5000/api/users
 @url_posts = http://localhost:5000/api/posts
+@url_likes = http://localhost:5000/api/likes
 @random = {{$randomInt 1 100}}
 ###
 GET {{url_users}}
@@ -30,7 +31,7 @@ POST {{url_posts}}
 Content-Type: application/json
 
 {
-    "user_id": 2,
+    "user_id": 1,
     "content": "content..."
 }
 ###
@@ -41,4 +42,14 @@ Content-Type: application/json
 
 {
     "content": "content... (updated)"
+}
+###
+DELETE {{url_posts}}/2
+###
+POST {{url_likes}}
+Content-Type: application/json
+
+{
+    "user_id": 2,
+    "post_id": 1
 }

@@ -7,6 +7,7 @@ app.use(express.json());
 
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/posts', require('./routes/api/posts'));
+app.use('/api/likes', require('./routes/api/likes'));
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}...`);

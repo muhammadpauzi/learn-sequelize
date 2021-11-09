@@ -1,12 +1,11 @@
 const express = require('express');
-const Post = require('../../models/Post');
-const User = require('../../models/User');
+const { Post, User, Like } = require('../../models');
 
 const router = express.Router();
 
 router.get('/', async (req, res) => {
     try {
-        const posts = await Post.findAll({ include: User });
+        const posts = await Post.findAll({ include: [User, Like] });
         return res.status(200).json({ data: posts });
     } catch (error) {
         console.log(error);
@@ -29,7 +28,7 @@ router.patch('/:id', async (req, res) => {
     const id = parseInt(req.params.id);
     try {
         const { user_id, content } = req.body;
-        const post = await Post.findByPk(id, { include: User });
+        const post = await Post.findByPk(id, { include: [User, Like] });
         const updatedPost = await post.update({
             UserId: post.UserId,
             content: post.content == content ? post.content : content,
@@ -44,7 +43,7 @@ router.patch('/:id', async (req, res) => {
 router.get('/:id', async (req, res) => {
     const id = parseInt(req.params.id);
     try {
-        const post = await Post.findByPk(id, { include: User });
+        const post = await Post.findByPk(id, { include: [User, Like] });
         return res.status(200).json({ data: post });
     } catch (error) {
         console.log(error);
